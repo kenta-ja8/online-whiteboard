@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Greeting Server
+paths:
+  /hello:
+    get:
+      parameters:
+        - name: namehello
+          required: false
+          in: query
+          description: defaults to World if not given
+          schema:
+            type: string
+      operationId: getGreeting
+      responses:
+        "200":
+          description: returns a greeting
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: contains the actual greeting as plain text
+  /goodby:
+    get:
+      parameters:
+        - name: namegoodby
+          required: false
+          in: query
+          description: defaults to World if not given
+          schema:
+            type: string
+      operationId: getGreeting
+      responses:
+        "200":
+          description: returns a greeting
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: contains the actual greeting as plain text
+    post:
+      parameters:
+        - name: namegoodby
+          required: false
+          in: query
+          description: defaults to World if not given
+          schema:
+            type: string
+      operationId: getGreeting
+      responses:
+        "200":
+          description: returns a greeting
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: contains the actual greeting as plain text
