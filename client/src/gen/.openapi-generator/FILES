@@ -1,0 +1,11 @@
+.openapi-generator-ignore
+apis/UserApi.ts
+apis/index.ts
+index.ts
+models/CreateUserInput.ts
+models/CreateUserOutput.ts
+models/GetUserOutput.ts
+models/UpdateUserInput.ts
+models/UpdateUserOutput.ts
+models/index.ts
+runtime.ts

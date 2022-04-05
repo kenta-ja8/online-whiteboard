@@ -38,13 +38,13 @@ docker run --rm \
     -g go-server \
     -o /local/server
 
-docker run --rm\
-  -v ${PWD}:/app \ 
+docker run --rm \
+  -v $PWD:/app \
   -u "$(id -u $USER):$(id -g $USER)" \
   -v /etc/passwd:/etc/passwd:ro \
   -v /etc/group:/etc/group:ro \
   openapitools/openapi-generator-cli generate \
-  -c /app/api/go-server-config.json \
-  -i /app/api/openapi-schema/openapi.yaml \
+  -i /app/openapi/openapi.yaml \
   -g typescript-fetch \
   -o /app/client/src/gen
+ 
