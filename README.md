@@ -24,7 +24,7 @@ https://blog.masu-mi.me/post/2021/12/23/no-good-go-code-generator-of-openapi-v3.
 https://qiita.com/doriven/items/7422f565d6ad2e8ff956
 https://qiita.com/amuyikam/items/e8a45daae59c68be0fc8
 
-
+https://future-architect.github.io/articles/20210427c/
 
 
 
@@ -38,3 +38,13 @@ docker run --rm \
     -g go-server \
     -o /local/server
 
+docker run --rm\
+  -v ${PWD}:/app \ 
+  -u "$(id -u $USER):$(id -g $USER)" \
+  -v /etc/passwd:/etc/passwd:ro \
+  -v /etc/group:/etc/group:ro \
+  openapitools/openapi-generator-cli generate \
+  -c /app/api/go-server-config.json \
+  -i /app/api/openapi-schema/openapi.yaml \
+  -g typescript-fetch \
+  -o /app/client/src/gen
