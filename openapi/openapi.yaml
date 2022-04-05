@@ -1,0 +1,233 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: HelloApiSchema
+  description: Practice api schema
+  contact:
+    name: doriven
+    email: doriven@example.com
+    url: 'https://example.com'
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:{port}
+    description: development
+    variables:
+      port:
+        enum:
+          - '80'
+          - '8080'
+        default: '8080'
+  - url: http://example.com
+    description: example
+security:
+  - BasicAuth: []
+tags:
+  - name: user
+    description: user api
+paths:
+  /users:
+    get:
+      tags:
+        - user
+      description: Get a users
+      operationId: getUserList
+      responses:
+        '200':
+          description: Success by usre
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserListOutput'
+    post:
+      tags:
+        - user
+      description: Create a new user.
+      operationId: createUser
+      requestBody:
+        description: new user info
+        required: true
+        content:
+          'application:json':
+            schema:
+              $ref: '#/components/schemas/CreateUserInput'
+      responses:
+        '200':
+          description: hoge
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserOutput'
+  /users/{id}:
+    get:
+      tags:
+        - user
+      description: Get a user by id.
+      operationId: getUser
+      responses:
+        '200':
+          description: Success by usre
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetUserOutput'
+      parameters:
+        - name: id
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: integer
+            format: int64
+components:
+  schemas:
+    user_id:
+      type: integer
+      format: int64
+      example: 1
+    email_address:
+      type: string
+      example: example@example.com
+    last_name:
+      type: string
+      example: 山田
+    first_name:
+      type: string
+      example: 太郎
+    birthday:
+      type: string
+      format: date
+      example: 2000-01-01
+    address:
+      type: string
+      example: 東京都新宿区西新宿２丁目８−１
+    CreateUserInput:
+      type: object
+      required:
+        - email_address
+        - last_name
+        - first_name
+        - birthday
+        - address
+      properties:
+        email_address:
+          $ref: '#/components/schemas/email_address'
+        last_name:
+          $ref: '#/components/schemas/last_name'
+        first_name:
+          $ref: '#/components/schemas/first_name'
+        birthday:
+          $ref: '#/components/schemas/birthday'
+        address:
+          $ref: '#/components/schemas/address'
+    CreateUserOutput:
+      type: object
+      required:
+        - id
+        - email_address
+        - last_name
+        - first_name
+        - birthday
+        - address
+      properties:
+        id:
+          $ref: '#/components/schemas/user_id'
+        email_address:
+          $ref: '#/components/schemas/email_address'
+        last_name:
+          $ref: '#/components/schemas/last_name'
+        first_name:
+          $ref: '#/components/schemas/first_name'
+        birthday:
+          $ref: '#/components/schemas/birthday'
+        address:
+          $ref: '#/components/schemas/address'
+    UpdateUserInput:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/user_id'
+        email_address:
+          $ref: '#/components/schemas/email_address'
+        last_name:
+          $ref: '#/components/schemas/last_name'
+        first_name:
+          $ref: '#/components/schemas/first_name'
+        birthday:
+          $ref: '#/components/schemas/birthday'
+        address:
+          $ref: '#/components/schemas/address'
+    UpdateUserOutput:
+      # componentsからcomponentsへの$refを使うとgenerator上で空のstructが生成されるのであえて重複して書いている
+      # $ref: '#/components/schemas/CreateUserOutput'
+      type: object
+      required:
+        - id
+        - email_address
+        - last_name
+        - first_name
+        - birthday
+        - address
+      properties:
+        id:
+          $ref: '#/components/schemas/user_id'
+        email_address:
+          $ref: '#/components/schemas/email_address'
+        last_name:
+          $ref: '#/components/schemas/last_name'
+        first_name:
+          $ref: '#/components/schemas/first_name'
+        birthday:
+          $ref: '#/components/schemas/birthday'
+        address:
+          $ref: '#/components/schemas/address'
+    GetUserOutput:
+      # componentsからcomponentsへの$refを使うとgenerator上で空のstructが生成されるのであえて重複して書いている
+      # $ref: '#/components/schemas/CreateUserOutput'
+      type: object
+      required:
+        - id
+        - email_address
+        - last_name
+        - first_name
+        - birthday
+        - address
+      properties:
+        id:
+          $ref: '#/components/schemas/user_id'
+        email_address:
+          $ref: '#/components/schemas/email_address'
+        last_name:
+          $ref: '#/components/schemas/last_name'
+        first_name:
+          $ref: '#/components/schemas/first_name'
+        birthday:
+          $ref: '#/components/schemas/birthday'
+        address:
+          $ref: '#/components/schemas/address'
+    GetUserListOutput:
+      type: array
+      items:
+        type: object 
+        required:
+          - id
+          - email_address
+          - last_name
+          - first_name
+          - birthday
+          - address
+        properties:
+          id:
+            $ref: '#/components/schemas/user_id'
+          email_address:
+            $ref: '#/components/schemas/email_address'
+          last_name:
+            $ref: '#/components/schemas/last_name'
+          first_name:
+            $ref: '#/components/schemas/first_name'
+          birthday:
+            $ref: '#/components/schemas/birthday'
+          address:
+            $ref: '#/components/schemas/address'

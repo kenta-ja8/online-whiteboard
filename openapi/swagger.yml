@@ -30,7 +30,7 @@ paths:
           description: defaults to World if not given
           schema:
             type: string
-      operationId: getGreeting
+      operationId: getGoodby
       responses:
         "200":
           description: returns a greeting
@@ -47,7 +47,7 @@ paths:
           description: defaults to World if not given
           schema:
             type: string
-      operationId: getGreeting
+      operationId: postGoodby
       responses:
         "200":
           description: returns a greeting
