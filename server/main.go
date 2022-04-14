@@ -14,7 +14,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/GIT_USER_ID/GIT_REPO_ID/api"
+	"github.com/GIT_USER_ID/GIT_REPO_ID/app"
 	openapi "github.com/GIT_USER_ID/GIT_REPO_ID/go"
 )
 
@@ -22,7 +22,7 @@ func main() {
 	log.Printf("Server started")
 
 	// UserApiService := openapi.NewUserApiService()
-	UserApiService := api.NewUserApiService()
+	UserApiService := app.NewUserApiService()
 	UserApiController := openapi.NewUserApiController(UserApiService)
 
 	router := openapi.NewRouter(UserApiController)

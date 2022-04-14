@@ -63,3 +63,13 @@ https://github.com/OpenAPITools/openapi-generator/issues/11179
 https://qiita.com/watiko/items/0961287c02eac9211572
 https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/main/resources/typescript-axios
 
+
+
+```
+cd server
+go run ./main
+
+docker build --network=host -t openapi .
+docker run --rm -it -p 8080:8080 openapi
+
+```

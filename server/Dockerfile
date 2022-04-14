@@ -1,7 +1,9 @@
-FROM golang:1.10 AS build
+FROM golang:1.17 AS build
 WORKDIR /go/src
 COPY go ./go
+COPY app ./app
 COPY main.go .
+COPY go.mod .
 
 ENV CGO_ENABLED=0
 RUN go get -d -v ./...
