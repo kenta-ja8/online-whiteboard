@@ -14,7 +14,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
       </p>
     </div>
     <div class="bg-slate-50 flex-grow p-3">
-      <RouterView />
+      <RouterView />aaaa
     </div>
   </div>
 </template>

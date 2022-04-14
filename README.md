@@ -36,7 +36,9 @@ docker run --rm \
     openapitools/openapi-generator-cli generate \
     -i /local/openapi/openapi.yaml \
     -g go-server \
-    -o /local/server
+    -o /local/server \
+    --additional-properties=featureCORS=true
+    
 
 docker run --rm \
   -v $PWD:/app \
@@ -45,6 +47,19 @@ docker run --rm \
   -v /etc/group:/etc/group:ro \
   openapitools/openapi-generator-cli generate \
   -i /app/openapi/openapi.yaml \
-  -g typescript-fetch \
+  -g typescript-axios \
+  -t /app/openapi/template \
   -o /app/client/src/gen
  
+ 
+## クライアントジェネレート
+### テンプレート作成
+- TypeScript3.8から ”Type-Only Imports and Export” が導入された
+- しかしながら、openapi-generatorのデフォルトではこれに対応していない模様
+- type を加えたテンプレートを作成した
+
+https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html
+https://github.com/OpenAPITools/openapi-generator/issues/11179
+https://qiita.com/watiko/items/0961287c02eac9211572
+https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/main/resources/typescript-axios
+

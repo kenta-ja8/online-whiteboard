@@ -54,8 +54,8 @@ func (s *UserApiService) GetUserList(ctx context.Context) (ImplResponse, error) 
 	// TODO - update GetUserList with the required logic for this service method.
 	// Add api_user_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
-	//TODO: Uncomment the next line to return response Response(200, []map[string]interface{}{}) or use other options such as http.Ok ...
-	//return Response(200, []map[string]interface{}{}), nil
+	//TODO: Uncomment the next line to return response Response(200, GetUserListOutput{}) or use other options such as http.Ok ...
+	//return Response(200, GetUserListOutput{}), nil
 
 	return Response(http.StatusNotImplemented, nil), errors.New("GetUserList method not implemented")
 }

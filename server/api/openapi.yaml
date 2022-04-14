@@ -252,26 +252,59 @@ components:
       - last_name
       type: object
     GetUserListOutput:
-      items:
-        properties:
-          id:
-            $ref: '#/components/schemas/user_id'
-          email_address:
-            $ref: '#/components/schemas/email_address'
-          last_name:
-            $ref: '#/components/schemas/last_name'
-          first_name:
-            $ref: '#/components/schemas/first_name'
-          birthday:
-            $ref: '#/components/schemas/birthday'
-          address:
-            $ref: '#/components/schemas/address'
-        required:
-        - address
-        - birthday
-        - email_address
-        - first_name
-        - id
-        - last_name
-        type: object
-      type: array
+      example:
+        user_list:
+        - birthday: 2000-01-23
+          email_address: example@example.com
+          address: 東京都新宿区西新宿２丁目８−１
+          last_name: 山田
+          id: 1
+          first_name: 太郎
+        - birthday: 2000-01-23
+          email_address: example@example.com
+          address: 東京都新宿区西新宿２丁目８−１
+          last_name: 山田
+          id: 1
+          first_name: 太郎
+      properties:
+        user_list:
+          items:
+            $ref: '#/components/schemas/GetUserListOutput_user_list'
+          type: array
+      type: object
+    GetUserListOutput_user_list:
+      example:
+        birthday: 2000-01-23
+        email_address: example@example.com
+        address: 東京都新宿区西新宿２丁目８−１
+        last_name: 山田
+        id: 1
+        first_name: 太郎
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+        email_address:
+          example: example@example.com
+          type: string
+        last_name:
+          example: 山田
+          type: string
+        first_name:
+          example: 太郎
+          type: string
+        birthday:
+          format: date
+          type: string
+        address:
+          example: 東京都新宿区西新宿２丁目８−１
+          type: string
+      required:
+      - address
+      - birthday
+      - email_address
+      - first_name
+      - id
+      - last_name
+      type: object

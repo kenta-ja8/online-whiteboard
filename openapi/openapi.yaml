@@ -6,7 +6,7 @@ info:
   contact:
     name: doriven
     email: doriven@example.com
-    url: 'https://example.com'
+    url: "https://example.com"
   license:
     name: MIT
 servers:
@@ -15,9 +15,9 @@ servers:
     variables:
       port:
         enum:
-          - '80'
-          - '8080'
-        default: '8080'
+          - "80"
+          - "8080"
+        default: "8080"
   - url: http://example.com
     description: example
 security:
@@ -33,12 +33,12 @@ paths:
       description: Get a users
       operationId: getUserList
       responses:
-        '200':
+        "200":
           description: Success by usre
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetUserListOutput'
+                $ref: "#/components/schemas/GetUserListOutput"
     post:
       tags:
         - user
@@ -48,16 +48,16 @@ paths:
         description: new user info
         required: true
         content:
-          'application:json':
+          "application:json":
             schema:
-              $ref: '#/components/schemas/CreateUserInput'
+              $ref: "#/components/schemas/CreateUserInput"
       responses:
-        '200':
+        "200":
           description: hoge
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateUserOutput'
+                $ref: "#/components/schemas/CreateUserOutput"
   /users/{id}:
     get:
       tags:
@@ -65,12 +65,12 @@ paths:
       description: Get a user by id.
       operationId: getUser
       responses:
-        '200':
+        "200":
           description: Success by usre
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetUserOutput'
+                $ref: "#/components/schemas/GetUserOutput"
       parameters:
         - name: id
           in: path
@@ -111,15 +111,15 @@ components:
         - address
       properties:
         email_address:
-          $ref: '#/components/schemas/email_address'
+          $ref: "#/components/schemas/email_address"
         last_name:
-          $ref: '#/components/schemas/last_name'
+          $ref: "#/components/schemas/last_name"
         first_name:
-          $ref: '#/components/schemas/first_name'
+          $ref: "#/components/schemas/first_name"
         birthday:
-          $ref: '#/components/schemas/birthday'
+          $ref: "#/components/schemas/birthday"
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
     CreateUserOutput:
       type: object
       required:
@@ -131,34 +131,34 @@ components:
         - address
       properties:
         id:
-          $ref: '#/components/schemas/user_id'
+          $ref: "#/components/schemas/user_id"
         email_address:
-          $ref: '#/components/schemas/email_address'
+          $ref: "#/components/schemas/email_address"
         last_name:
-          $ref: '#/components/schemas/last_name'
+          $ref: "#/components/schemas/last_name"
         first_name:
-          $ref: '#/components/schemas/first_name'
+          $ref: "#/components/schemas/first_name"
         birthday:
-          $ref: '#/components/schemas/birthday'
+          $ref: "#/components/schemas/birthday"
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
     UpdateUserInput:
       type: object
       required:
         - id
       properties:
         id:
-          $ref: '#/components/schemas/user_id'
+          $ref: "#/components/schemas/user_id"
         email_address:
-          $ref: '#/components/schemas/email_address'
+          $ref: "#/components/schemas/email_address"
         last_name:
-          $ref: '#/components/schemas/last_name'
+          $ref: "#/components/schemas/last_name"
         first_name:
-          $ref: '#/components/schemas/first_name'
+          $ref: "#/components/schemas/first_name"
         birthday:
-          $ref: '#/components/schemas/birthday'
+          $ref: "#/components/schemas/birthday"
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
     UpdateUserOutput:
       # componentsからcomponentsへの$refを使うとgenerator上で空のstructが生成されるのであえて重複して書いている
       # $ref: '#/components/schemas/CreateUserOutput'
@@ -172,17 +172,17 @@ components:
         - address
       properties:
         id:
-          $ref: '#/components/schemas/user_id'
+          $ref: "#/components/schemas/user_id"
         email_address:
-          $ref: '#/components/schemas/email_address'
+          $ref: "#/components/schemas/email_address"
         last_name:
-          $ref: '#/components/schemas/last_name'
+          $ref: "#/components/schemas/last_name"
         first_name:
-          $ref: '#/components/schemas/first_name'
+          $ref: "#/components/schemas/first_name"
         birthday:
-          $ref: '#/components/schemas/birthday'
+          $ref: "#/components/schemas/birthday"
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
     GetUserOutput:
       # componentsからcomponentsへの$refを使うとgenerator上で空のstructが生成されるのであえて重複して書いている
       # $ref: '#/components/schemas/CreateUserOutput'
@@ -196,38 +196,41 @@ components:
         - address
       properties:
         id:
-          $ref: '#/components/schemas/user_id'
+          $ref: "#/components/schemas/user_id"
         email_address:
-          $ref: '#/components/schemas/email_address'
+          $ref: "#/components/schemas/email_address"
         last_name:
-          $ref: '#/components/schemas/last_name'
+          $ref: "#/components/schemas/last_name"
         first_name:
-          $ref: '#/components/schemas/first_name'
+          $ref: "#/components/schemas/first_name"
         birthday:
-          $ref: '#/components/schemas/birthday'
+          $ref: "#/components/schemas/birthday"
         address:
-          $ref: '#/components/schemas/address'
+          $ref: "#/components/schemas/address"
     GetUserListOutput:
-      type: array
-      items:
-        type: object 
-        required:
-          - id
-          - email_address
-          - last_name
-          - first_name
-          - birthday
-          - address
-        properties:
-          id:
-            $ref: '#/components/schemas/user_id'
-          email_address:
-            $ref: '#/components/schemas/email_address'
-          last_name:
-            $ref: '#/components/schemas/last_name'
-          first_name:
-            $ref: '#/components/schemas/first_name'
-          birthday:
-            $ref: '#/components/schemas/birthday'
-          address:
-            $ref: '#/components/schemas/address'
+      type: object
+      properties:
+        user_list:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - email_address
+              - last_name
+              - first_name
+              - birthday
+              - address
+            properties:
+              id:
+                $ref: "#/components/schemas/user_id"
+              email_address:
+                $ref: "#/components/schemas/email_address"
+              last_name:
+                $ref: "#/components/schemas/last_name"
+              first_name:
+                $ref: "#/components/schemas/first_name"
+              birthday:
+                $ref: "#/components/schemas/birthday"
+              address:
+                $ref: "#/components/schemas/address"

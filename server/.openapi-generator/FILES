@@ -11,6 +11,8 @@ go/impl.go
 go/logger.go
 go/model_create_user_input.go
 go/model_create_user_output.go
+go/model_get_user_list_output.go
+go/model_get_user_list_output_user_list.go
 go/model_get_user_output.go
 go/model_update_user_input.go
 go/model_update_user_output.go

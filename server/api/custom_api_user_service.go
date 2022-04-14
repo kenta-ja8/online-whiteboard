@@ -87,5 +87,9 @@ func (s *UserApiService) GetUserList(ctx context.Context) (openapi.ImplResponse,
 	//return Response(200, []map[string]interface{}{}), nil
 
 	// return openapi.Response(http.StatusNotImplemented, nil), errors.New("GetUserList method not implemented")
-	return openapi.Response(http.StatusOK, ur.recordList), nil
+	userListRes := openapi.GetUserListOutput{UserList: []openapi.GetUserListOutputUserList{}}
+	for _, el := range ur.recordList {
+		userListRes.UserList = append(userListRes.UserList, openapi.GetUserListOutputUserList(el))
+	}
+	return openapi.Response(http.StatusOK, userListRes), nil
 }
