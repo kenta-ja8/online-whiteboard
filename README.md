@@ -73,3 +73,17 @@ docker build --network=host -t openapi .
 docker run --rm -it -p 8080:8080 openapi
 
 ```
+
+## Terraform
+
+```
+cd terraform
+terraform init
+terraform import -var-file="env.tfvars" aws_cloudfront_function.cloudfront_function arn:aws:cloudfront::749794220379:function/handler
+
+terraform plan -var-file="env.tfvars"
+terraform apply -var-file="env.tfvars"
+
+```
+
+- CloudFrontのFunctionをインポートしてもハングアップ状態になった
