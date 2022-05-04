@@ -11,6 +11,26 @@ resource "aws_s3_bucket" "vue" {
   }
 }
 
+resource "aws_s3_bucket_policy" "vue_bucket_policy" {
+  bucket = "first-s3-jackyutajack"
+  policy = jsonencode(
+    {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action = "s3:GetObject"
+          Effect = "Allow"
+          Principal = {
+            AWS = "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity EFHWMOPJF1U77"
+          }
+          Resource = "arn:aws:s3:::first-s3-jackyutajack/*"
+          Sid      = "2"
+        },
+      ]
+    }
+  )
+}
+
 resource "aws_ecr_repository" "ecr" {
   name = "first-ecr-jackyutajack"
 }

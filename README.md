@@ -1,10 +1,23 @@
 
+# Online White Board
 
+## 起動
 
+### サーバー
+```
+cd server
+go run main.go
+```
+
+### クライアント
+```
+cd client
+npm run dev
+```
+
+## 開発
+```
 swagger generate server -f ./swagger/swagger.yml -t server/gen
-
-afdsaf
-fsdf
 
 docker run --rm \
     -v $PWD:/local openapitools/openapi-generator-cli generate \
@@ -17,17 +30,15 @@ docker run --rm \
     -i /local/swagger/swagger.yml \
     -g go \
     -o /local/server/gen
+```
+
+- https://blog.masu-mi.me/post/2021/12/23/no-good-go-code-generator-of-openapi-v3.0/
+- https://qiita.com/doriven/items/7422f565d6ad2e8ff956
+- https://qiita.com/amuyikam/items/e8a45daae59c68be0fc8
+- https://future-architect.github.io/articles/20210427c/
 
 
-https://blog.masu-mi.me/post/2021/12/23/no-good-go-code-generator-of-openapi-v3.0/
-
-https://qiita.com/doriven/items/7422f565d6ad2e8ff956
-https://qiita.com/amuyikam/items/e8a45daae59c68be0fc8
-
-https://future-architect.github.io/articles/20210427c/
-
-
-
+```
 docker run --rm \
     -v $PWD:/local \
     -u "$(id -u $USER):$(id -g $USER)" \
@@ -50,7 +61,7 @@ docker run --rm \
   -g typescript-axios \
   -t /app/openapi/template \
   -o /app/client/src/gen
- 
+ ```
  
 ## クライアントジェネレート
 ### テンプレート作成
@@ -58,10 +69,10 @@ docker run --rm \
 - しかしながら、openapi-generatorのデフォルトではこれに対応していない模様
 - type を加えたテンプレートを作成した
 
-https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html
-https://github.com/OpenAPITools/openapi-generator/issues/11179
-https://qiita.com/watiko/items/0961287c02eac9211572
-https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/main/resources/typescript-axios
+- https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html
+- https://github.com/OpenAPITools/openapi-generator/issues/11179
+- https://qiita.com/watiko/items/0961287c02eac9211572
+- https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator/src/main/resources/typescript-axios
 
 
 
@@ -70,7 +81,7 @@ cd server
 go run ./main
 
 docker build --network=host -t openapi .
-docker run --rm -it -p 8080:8080 openapi
+docker run --rm -it openapi
 
 ```
 
@@ -87,3 +98,13 @@ terraform apply -var-file="env.tfvars"
 ```
 
 - CloudFrontのFunctionをインポートしてもハングアップ状態になった
+
+
+
+## Deploy
+
+```
+aws s3 sync . s3://projectname-static-files --delete --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --exclude "README.md"
+aws s3 sync . s3://first-s3-jackyutajack --delete 
+
+```

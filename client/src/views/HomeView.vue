@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref, ssrContextKey } from 'vue'
 import { UserApi, type GetUserListOutput } from "@/gen/api"
+import StickyNote from "@/components/stickyNote.vue"
 
 
 const state = reactive({
@@ -25,6 +26,7 @@ let pointerXOnSticky = 0
 let pointerYOnSticky = 0
 
 const canvas = ref<HTMLDivElement>()
+const oldcanvas = ref<HTMLDivElement>()
 let isClickedSticky = false
 const onMouseDownSticky = (e: any) => {
   console.log('onMouseDownSticky')
@@ -40,7 +42,10 @@ const onMouseMove = (e: any) => {
   if (isClickedScaleIcon) {
     console.log('onMouseMoveScaleIcon', e)
     const absoluteCanvas = canvas.value?.getBoundingClientRect()
-    if (!absoluteCanvas) return
+    console.log('return vue', canvas)
+    if (!absoluteCanvas) {
+      return
+    }
     // 描画エリアをはみ出す場合は処理を行わない
     if (absoluteCanvas.right < e.clientX || absoluteCanvas.bottom < e.clientY) return
 
@@ -70,6 +75,19 @@ const onMouseMove = (e: any) => {
   }
 }
 const onMouseUp = () => { isClickedScaleIcon = isClickedSticky = false }
+
+
+const selectedStickyNote = {
+  onMouseMove: () => { },
+  onMouseUp: () => { },
+}
+const resister = (mouseEvent: typeof selectedStickyNote) => {
+  console.log('resister')
+  selectedStickyNote.onMouseMove = mouseEvent.onMouseMove
+  selectedStickyNote.onMouseUp = mouseEvent.onMouseUp
+}
+
+
 </script>
 
 <template>
@@ -86,7 +104,7 @@ const onMouseUp = () => { isClickedScaleIcon = isClickedSticky = false }
     {{ state.xpos }}
     {{ state.ypos }}
     <div>
-      <div class="canvas relative w-[1000px] h-[600px] bg-white border-2" ref="canvas" @mousemove="onMouseMove"
+      <div class="canvas relative w-[1000px] h-[600px] bg-white border-2" ref="oldcanvas" @mousemove="onMouseMove"
         @mouseup="onMouseUp">
         <div ref="sticky" class="flex left-2 bg-green-200 shadow-lg"
           :style="{ top: state.ypos + 'px', left: state.xpos + 'px', width: state.width + 'px', height: state.height + 'px' }">
@@ -97,5 +115,14 @@ const onMouseUp = () => { isClickedScaleIcon = isClickedSticky = false }
       </div>
     </div>
     <textarea />
+    <div>
+      <div class="canvas relative w-[1000px] h-[600px] bg-white border-2" ref="canvas"
+        @mousemove="selectedStickyNote.onMouseMove" @mouseup="selectedStickyNote.onMouseUp">
+        <StickyNote @selectStickyNote="resister" :xpos="2" :ypos="2" :init-width="3" :init-height="3"
+          :canvas="canvas" />
+        <StickyNote @selectStickyNote="resister" :xpos="2" :ypos="2" :init-width="3" :init-height="3"
+          :canvas="canvas" />
+      </div>
+    </div>
   </div>
 </template>
